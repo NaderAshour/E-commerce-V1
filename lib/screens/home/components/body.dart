@@ -138,42 +138,37 @@ class _BodyHomeState extends State<BodyHome> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(height: 20,),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
-                child: Text(
-                  "Women",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline5
-                      !.copyWith(fontWeight: FontWeight.bold),
-                ),
-              ),
               Categories(),
-
               FutureBuilder<CategoryModal>(
                 future: CategoryRequest().getdata('4210'),
                 builder:(context,snapshot){
                   if(snapshot.hasData){
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
-                      child: GridView.builder(
-                          itemCount: snapshot.data!.products!.length,
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: kDefaultPaddin,
-                            crossAxisSpacing: kDefaultPaddin,
-                            childAspectRatio: 0.75,
-                          ),
-                          itemBuilder: (context, index) => ItemCard(
-                            product: snapshot.data!.products![index],
-                            press: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => DetailsScreen(
-                                    product: snapshot.data!.products![index],
-                                  ),
-                                )),
-                          )),
+                    return Column(
+                      children: [
+
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+                          child: GridView.builder(
+                            scrollDirection: Axis.vertical,
+                              itemCount: snapshot.data!.products!.length,
+                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: kDefaultPaddin,
+                                crossAxisSpacing: kDefaultPaddin,
+                                childAspectRatio: 0.75,
+                              ),
+                              itemBuilder: (context, index) => ItemCard(
+                                product: snapshot.data!.products![index],
+                                press: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailsScreen(
+                                        product: snapshot.data!.products![index],
+                                      ),
+                                    )),
+                              )),
+                        ),
+                      ],
                     );
                   }
                   if(snapshot.hasError){

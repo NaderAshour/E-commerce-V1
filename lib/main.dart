@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/screens/Splash_Screen.dart';
+import 'package:shop_app/screens/home/components/body.dart';
 import 'Data_Base/DB_Models/Helper/cart_provider.dart';
 import 'Data_Base/DB_Models/Helper/favourite_provider.dart';
 import 'constants.dart';
@@ -7,8 +8,8 @@ import 'constants.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  Cart_Provider.instance.open();
-  Favourite_Provider.instance.open();
+  //Cart_Provider.instance.open();
+  //Favourite_Provider.instance.open();
   runApp(MyApp());
 }
 

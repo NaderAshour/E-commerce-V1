@@ -19,17 +19,15 @@ class ItemCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.all(kDefaultPaddin),
-              decoration: BoxDecoration(
+          Container(
+            padding: EdgeInsets.all(kDefaultPaddin),
+            decoration: BoxDecoration(
 
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Hero(
-                tag: "${product.id}",
-                child: Image.network('http://'+product.image.toString()),
-              ),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Hero(
+              tag: "${product.id}",
+              child: Image.network('http://'+product.image.toString()),
             ),
           ),
           Padding(

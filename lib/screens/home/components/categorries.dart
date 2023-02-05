@@ -3,7 +3,7 @@ import 'package:shop_app/models/Request/CategoryRequest.dart';
 
 import '../../../constants.dart';
 
-// We need satefull widget for our categories
+
 
 class Categories extends StatefulWidget {
   @override
@@ -23,21 +23,30 @@ class _CategoriesState extends State<Categories> {
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: categories.length,
-          itemBuilder: (context, index) => buildCategory(index),
+          itemBuilder: (context, index) => GestureDetector(
+              onTap:(){
+              //getdata('${categories_id[index]}');
+              setState(() {
+                selectedIndex =index;
+              });},
+              child: buildCategory(index)
+          ),
         ),
       ),
     );
   }
 
   Widget buildCategory(int index) {
-    return GestureDetector(
-      onTap: () {
-        // getdata('${categories_id[index]}');
-        setState(() {
-          selectedIndex = index;
-        });
-      },
-      child: Padding(
+     return
+       //GestureDetector(
+    //   onTap: () {
+    //      //getdata('${categories_id[index]}');
+    //     setState(() {
+    //       selectedIndex =index;
+    //     });
+    //   },
+    //   child:
+       Padding(
         padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,7 +66,7 @@ class _CategoriesState extends State<Categories> {
             )
           ],
         ),
-      ),
-    );
+      );
+
   }
 }

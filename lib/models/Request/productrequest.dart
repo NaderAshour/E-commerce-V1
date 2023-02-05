@@ -8,7 +8,7 @@ Future<Product> GetProductdata(String ProductId) async{
         'id': ProductId, 'lang': 'en-US', 'store': 'US', 'sizeSchema': 'US', 'currency': 'USD'
       }),
       headers: {
-        'X-RapidAPI-Key': 'e667247f01msh6d7d535460ee861p1fc683jsnfd14e8a27872',
+        'X-RapidAPI-Key': '8738984fe0msh775013e63bd3afap1f94fcjsnde255588dd5d',
         'X-RapidAPI-Host': 'asos2.p.rapidapi.com'
       });
   if (request.statusCode <= 299 && request.statusCode >= 200) {

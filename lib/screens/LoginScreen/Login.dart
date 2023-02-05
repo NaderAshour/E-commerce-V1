@@ -135,126 +135,128 @@ class _LoginScreenState extends State<LoginScreen> {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: const Text('Animated Login')),
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ClipPath(
-                   clipper: Customshape(),
-                  child: Container(
-                    width: width,
-                    height:height*0.3,
-                    color: Colors.grey,
+    //  appBar: AppBar(title: const Text('Login Screen'),centerTitle: true,),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Stack(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ClipPath(
+                     clipper: Customshape(),
+                    child: Container(
+                      width: width,
+                      height:height*0.3,
+                      color: Colors.grey,
+                    ),
                   ),
-                ),
-                SizedBox(height: 160,),
-                ClipPath(
-                  clipper: Customshape2(),
-                  child: Container(
-                    width: width,
-                    height:height,
-                    color: Colors.cyan,
+                  SizedBox(height: 160,),
+                 //ClipPath(
+                 //  clipper: Customshape2(),
+                 //  child: Container(
+                 //    width: width,
+                 //    height:height,
+                 //    color: Colors.cyan,
+                 //  ),
+                 //),
+                ],
+              ),
+
+              Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width / 20),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 3,
+                    child: riveArtboard == null
+                        ? const SizedBox.shrink()
+                        : Rive(
+                      artboard: riveArtboard!,
+                    ),
                   ),
-                ),
-              ],
-            ),
-
-            Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width / 20),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 3,
-                  child: riveArtboard == null
-                      ? const SizedBox.shrink()
-                      : Rive(
-                    artboard: riveArtboard!,
-                  ),
-                ),
-                Form(
-                  key: formKey,
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        decoration: InputDecoration(
-                          labelText: "Email",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25.0),
+                  Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          decoration: InputDecoration(
+                            labelText: "Email",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                            ),
                           ),
-                        ),
-                        validator: (value) =>
-                        value != testEmail ? "Wrong email" : null,
-                        onChanged: (value) {
-                          if (value.isNotEmpty &&
-                              value.length < 16 &&
-                              !isLookingLeft) {
-                            addLookLeftController();
-                          } else if (value.isNotEmpty &&
-                              value.length > 16 &&
-                              !isLookingRight) {
-                            addLookRightController();
-                          }
-                        },
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 25,
-                      ),
-                      TextFormField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          labelText: "Password",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25.0),
-                          ),
-                        ),
-                        focusNode: passwordFocusNode,
-                        validator: (value) =>
-                        value != testPassword ? "Wrong password" : null,
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 18,
-                      ),
-                      Container(
-                        width: double.infinity,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: MediaQuery.of(context).size.width / 8,
-                        ),
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            shape: const StadiumBorder(),
-                            backgroundColor: Colors.blue,
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                          ),
-                          onPressed: () {
-                            passwordFocusNode.unfocus();
-
-                            validateEmailAndPassword();
-                            if(formKey.currentState!.validate()){
-
-                             Future.delayed(const Duration(milliseconds: 1800),
-                                 ()=> Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Body()))
-                             );
+                          validator: (value) =>
+                          value != testEmail ? "Wrong email" : null,
+                          onChanged: (value) {
+                            if (value.isNotEmpty &&
+                                value.length < 16 &&
+                                !isLookingLeft) {
+                              addLookLeftController();
+                            } else if (value.isNotEmpty &&
+                                value.length > 16 &&
+                                !isLookingRight) {
+                              addLookRightController();
                             }
-
                           },
-                          child: const Text(
-                            'Login',
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 25,
+                        ),
+                        TextFormField(
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            labelText: "Password",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                            ),
+                          ),
+                          focusNode: passwordFocusNode,
+                          validator: (value) =>
+                          value != testPassword ? "Wrong password" : null,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 18,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: MediaQuery.of(context).size.width / 8,
+                          ),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              shape: const StadiumBorder(),
+                              backgroundColor: Colors.blue,
+                              padding: const EdgeInsets.symmetric(vertical: 14),
+                            ),
+                            onPressed: () {
+                              passwordFocusNode.unfocus();
+
+                              validateEmailAndPassword();
+                              if(formKey.currentState!.validate()){
+
+                               Future.delayed(const Duration(milliseconds: 1800),
+                                   ()=> Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Body()))
+                               );
+                              }
+
+                            },
+                            child: const Text(
+                              'Login',
+                              style: TextStyle(fontSize: 20, color: Colors.white),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
 
-          ]
+            ]
+          ),
         ),
       ),
     );
@@ -271,8 +273,10 @@ class Customshape extends CustomClipper<Path>{
     double width = size.width;
 
     var path = Path();
-    path.lineTo(0, height-10);
-    path.cubicTo(0, height,width*0.5,height*0.001, width, height);
+    path.lineTo(0, height-100);
+    //path.cubicTo(0, height,width*0.5,height*0.001, width, height);
+    path.cubicTo(0, height-100, width*0.25,height , width*0.5, height-100);
+    path.cubicTo(width*0.5, height-100, width*0.75,height , width, height-100);
    // path.quadraticBezierTo(width/2, height*0.1, width, height-80);
     path.lineTo(width, 0);
     path.close();
@@ -291,13 +295,13 @@ class Customshape2 extends CustomClipper<Path>{
   Path getClip(Size size) {
     double height = size.height;
     double width = size.width;
-
     var path = Path();
-    path.moveTo(0, height);
-    path.lineTo(0, 0);
-    path.cubicTo(0, 0,width*0.5,190, width, 0);
-    //path.lineTo(width, 0);
-    path.lineTo(width, height);
+    path.moveTo(0, 0);
+    path.lineTo(0,height );
+   path.cubicTo(0, height-100,width*0.25,height, width*0.5, height-100);
+   path.cubicTo(width*0.5, height-100,width*0.75,height, width, height-100);
+   //path.lineTo(width, 0);
+    path.lineTo(width, 0);
     //path.cubicTo(width*0.2, height,width*0.4,height*0.001, width, height);
    // path.quadraticBezierTo(width/2, height*0.1, width, height-80);
    // path.lineTo(width, height);

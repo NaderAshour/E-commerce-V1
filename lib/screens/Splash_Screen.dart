@@ -31,7 +31,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 class SplashScreen extends StatefulWidget{
 
   @override
@@ -63,44 +62,44 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
+      body: SingleChildScrollView(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
 
-              colors: [Colors.white,Colors.white10]
+                colors: [Colors.white,Colors.white10]
+            ),
           ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-          //    Lottie.asset(
-          //   "assets/lottie/supermarket.json",
-          //   height: 300.0,
-          //   width: 300.0,
-          //   controller: controller,
-
-          // ),
-                Text(" We Are In Your Service,All time",textAlign:TextAlign.center,
-                  style:TextStyle(fontWeight: FontWeight.bold,fontSize: 25),
-                )
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                width: 300,
+                height: 300,
+                child: Lottie.asset(
+                "assets/lottie/supermarket.json",
+                  controller: controller,
+                  animate: true,
 
 
-              ],
+
             ),
+              ),
+                 Text(" We Are In Your Service,All time",textAlign:TextAlign.center,
+                   style:TextStyle(fontWeight: FontWeight.bold,fontSize: 25),
+                 ),
 
-            CircularProgressIndicator(
-              valueColor:  AlwaysStoppedAnimation<Color>(Colors.orange),
-            ),
-          ],
+              CircularProgressIndicator(
+                valueColor:  AlwaysStoppedAnimation<Color>(Colors.orange),
+              ),
+            ],
+          ),
         ),
       ),
     );
