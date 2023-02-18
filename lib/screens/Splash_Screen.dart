@@ -46,8 +46,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     Timer(Duration(milliseconds: 3500),
             ()=>Navigator.pushReplacement(context,
             MaterialPageRoute(builder:
-                (context) =>
-                    LoginScreen()
+                (context) =>LoginScreen()
             )
         )
     );
@@ -60,45 +59,57 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.lightBlueAccent,
-      body: SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.lightBlueAccent,
+        body: SingleChildScrollView(
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+         /*   decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
 
-                colors: [Colors.white,Colors.white10]
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Container(
-                width: 300,
-                height: 300,
-                child: Lottie.asset(
-                "assets/lottie/supermarket.json",
-                  controller: controller,
-                  animate: true,
-
-
-
-            ),
+                  colors: [Colors.white,Colors.white10]
               ),
-                 Text(" We Are In Your Service,All time",textAlign:TextAlign.center,
-                   style:TextStyle(fontWeight: FontWeight.bold,fontSize: 25),
-                 ),
+            ),*/
+            child: Stack(
+              children:[
+                Image(image: AssetImage('assets/a9c3bc62-4166-4b93-9fe9-c32c496e4211.jpg'),
+                  height:MediaQuery.of(context).size.height,
+                  fit: BoxFit.fitHeight,
 
-              CircularProgressIndicator(
-                valueColor:  AlwaysStoppedAnimation<Color>(Colors.orange),
-              ),
-            ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Container(
+                      width: 300,
+                      height: 300,
+                      child: Lottie.asset(
+                        'assets/lottie/supermarket.json',
+                        controller: controller,
+                        animate: true,
+
+
+
+                      ),
+                    ),
+                    Text(" We Are In Your Service,All time",textAlign:TextAlign.center,
+                      style:TextStyle(fontWeight: FontWeight.bold,fontSize: 25),
+                    ),
+
+                    CircularProgressIndicator(
+                      valueColor:  AlwaysStoppedAnimation<Color>(Colors.orange),
+                    ),
+                  ],
+                ),
+              ],
+
+            ),
           ),
         ),
       ),

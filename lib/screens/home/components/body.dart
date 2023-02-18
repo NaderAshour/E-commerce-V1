@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_app/models/CategoryModal.dart';
 import 'package:shop_app/models/Request/CategoryRequest.dart';
 import 'package:shop_app/screens/Shimmerwidget.dart';
+import 'package:shop_app/screens/home/components/model_state.dart';
 import 'package:shop_app/screens/home/components/profilescreen.dart';
 import '../../../constants.dart';
 
@@ -11,6 +13,9 @@ import 'cartscreen.dart';
 import 'categorries.dart';
 import 'item_card.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+
+import 'model_state.dart';
+import 'model_state.dart';
 bool isloading= false;
 class Body extends StatefulWidget {
   @override
@@ -130,9 +135,11 @@ class BodyHome extends StatefulWidget {
 
 class _BodyHomeState extends State<BodyHome> {
   @override
+  List<int> categories_id=[4208,4209,4210];
+  int Selected_Id=4210;
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(  
+      body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -140,7 +147,8 @@ class _BodyHomeState extends State<BodyHome> {
               SizedBox(height: 20,),
               Categories(),
               FutureBuilder<CategoryModal>(
-                future: CategoryRequest().getdata('4210'),
+                future: CategoryRequest().getdata(''
+                    '${categories_id[0]}'),
                 builder:(context,snapshot){
                   if(snapshot.hasData){
                     return Column(
@@ -148,26 +156,37 @@ class _BodyHomeState extends State<BodyHome> {
 
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
-                          child: GridView.builder(
-                            scrollDirection: Axis.vertical,
-                              itemCount: snapshot.data!.products!.length,
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                mainAxisSpacing: kDefaultPaddin,
-                                crossAxisSpacing: kDefaultPaddin,
-                                childAspectRatio: 0.75,
-                              ),
-                              itemBuilder: (context, index) => ItemCard(
-                                product: snapshot.data!.products![index],
-                                press: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => DetailsScreen(
-                                        product: snapshot.data!.products![index],
+                          child: SizedBox(
+
+                            child: GridView.builder(
+                              scrollDirection: Axis.vertical,
+                                itemCount: snapshot.data!.products!.length,
+                                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  mainAxisSpacing: kDefaultPaddin,
+                                  crossAxisSpacing: kDefaultPaddin,
+                                  childAspectRatio: 0.75,
+                                ),
+                                itemBuilder: (context, index) => ItemCard(
+                                  product: snapshot.data!.products![index],
+                                  press: () => WidgetsBinding.instance.addPostFrameCallback((_)
+                  {
+                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => DetailsScreen(
+                                          product: snapshot.data!.products![index],
+                                        ),
                                       ),
-                                    )),
-                              )),
-                        ),
+                    );
+                  }
+                  )
+
+                            ),
+
+                          ),
+                       height: MediaQuery.of(context).size.height, ),
+                        )
                       ],
                     );
                   }

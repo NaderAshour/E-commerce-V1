@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shop_app/screens/details/components/detailsBody.dart';
+import 'package:shop_app/screens/home/components/cartscreen.dart';
 
 import '../../constants.dart';
 import '../../models/Product.dart';
@@ -38,7 +39,9 @@ class DetailsScreen extends StatelessWidget {
         ),
         IconButton(
           icon: SvgPicture.asset("assets/icons/cart.svg"),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CartScreen()));
+          },
         ),
         SizedBox(width: kDefaultPaddin / 2)
       ],

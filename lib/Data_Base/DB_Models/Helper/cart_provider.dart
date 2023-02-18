@@ -41,7 +41,7 @@ class Cart_Provider {
   }
 
   Future<List<Cart_Model>> getAllCarts() async {
-    List<Map<String, dynamic>> CartMaps = await db!.query('cartTable');
+    List<Map<String, dynamic>> CartMaps = await db!.query('${cartTable}');
     if (CartMaps.isEmpty) {
       return [];
     } else {

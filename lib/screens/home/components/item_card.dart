@@ -18,24 +18,27 @@ class ItemCard extends StatelessWidget {
       onTap: press(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.all(kDefaultPaddin),
+            padding: EdgeInsets.only(left: kDefaultPaddin,right: kDefaultPaddin,),
             decoration: BoxDecoration(
 
               borderRadius: BorderRadius.circular(16),
             ),
             child: Hero(
               tag: "${product.id}",
-              child: Image.network('http://'+product.image.toString()),
+              child: Image.network('http://'+product.image.toString(),),
             ),
+
           ),
+
           Padding(
             padding: const EdgeInsets.symmetric(vertical: kDefaultPaddin / 4),
             child: Text(
               // products is out demo list
               product.title.toString(),
-              style: TextStyle(color: kTextLightColor),
+              style: TextStyle(overflow:TextOverflow.ellipsis,color: kTextLightColor,),
             ),
           ),
           Text(
